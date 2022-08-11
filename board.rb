@@ -68,7 +68,7 @@ class Board
         piece.pos = [end_pos[0],end_pos[1]] #update to new position
     end
 
-    def show
+    def show(pos, *selected) #pos is cursor's position
         puts "  0 1 2 3 4 5 6 7"
         @board.each_with_index do |row, i|
             if i.even?
@@ -102,5 +102,9 @@ class Board
 
             puts "#{i} #{colored[0]}#{colored[1]}#{colored[2]}#{colored[3]}#{colored[4]}#{colored[5]}#{colored[6]}#{colored[7]}"
         end
+    end
+
+    def game_over?
+        false
     end
 end

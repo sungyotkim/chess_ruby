@@ -2,6 +2,8 @@ require_relative "board.rb"
 require_relative "cursor.rb"
 
 class Display
+    attr_reader :board, :cursor
+
     def initialize(board)
         @board = board
         @cursor = Cursor.new([0,0], board)
