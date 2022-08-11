@@ -11,4 +11,7 @@ class NullPiece < Piece
     def to_s
         @symbol
     end
+
+    private
+    attr_reader :symbol, :color
 end
