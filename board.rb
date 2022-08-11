@@ -89,6 +89,17 @@ class Board
                     end
                 end
             end
+
+            if i == pos[0] #adds red square to where the player's cursor is 
+                colored[pos[1]] = (row[pos[1]].to_s + " ").colorize(:background => :red)
+            end
+
+            if selected #adds a green square to where the player previously selected
+                if i == selected[0] 
+                    colored[selected[1]] = (row[selected[1]].to_s + " ").colorize(:background => :green)
+                end
+            end
+
             puts "#{i} #{colored[0]}#{colored[1]}#{colored[2]}#{colored[3]}#{colored[4]}#{colored[5]}#{colored[6]}#{colored[7]}"
         end
     end
