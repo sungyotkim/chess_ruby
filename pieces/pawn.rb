@@ -18,4 +18,12 @@ class Pawn < Piece
         end
         false
     end
+
+    def forward_dir
+        if self.color == :white 
+            return [-1, 0]
+        else
+            return [1, 0]
+        end
+    end
 end
