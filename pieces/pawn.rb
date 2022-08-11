@@ -73,6 +73,14 @@ class Pawn < Piece
         end
     end
 
+    def side_dir
+        if self.color == :white 
+            return [[-1, -1], [-1, 1]]
+        else
+            return [[1, -1], [1, 1]]
+        end
+    end
+
     def side_attacks
         start_pos = self.pos
         current_color = self.color
