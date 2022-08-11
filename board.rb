@@ -50,9 +50,23 @@ class Board
         end
     end
 
-    # def move_piece(start_pos, end_pos)
+    def move_piece(start_pos, end_pos)
+        raise "There is no piece at this position" if @board[start_pos[0]][start_pos[1]].is_a?(NullPiece)
+        raise "End position is out of board range" if !valid_pos?(end_pos)
 
-    # end
+        piece = @board[start_pos[0]][start_pos[1]]
+        raise RuntimeError "Invalid move" if !piece.valid_moves.include?(end_pos)
+
+        begin    
+        rescue RuntimeError
+            p "Please another move"
+            retry
+        end
+
+        @board[start_pos[0]][start_pos[1]] = NullPiece.instance #replace with empty instance
+        @board[end_pos[0]][end_pos[1]] = piece
+        piece.pos = [end_pos[0],end_pos[1]] #update to new position
+    end
 
     def show
         puts "  0 1 2 3 4 5 6 7"

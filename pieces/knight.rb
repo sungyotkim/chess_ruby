@@ -12,7 +12,7 @@ class Knight < Piece
         @symbol
     end
 
-    def move_diffs #array of 8 possible movements
+    def move_diffs #array of 8 possible moves
         [
             [-2, -1],
             [-2,  1],

@@ -20,6 +20,6 @@ class Piece
         moves #need an array of possible moves from the piece, use modules for sliding and stepping pieces
     end
 
-    private
+    protected
     attr_reader :color, :pos
 end
