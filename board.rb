@@ -4,6 +4,7 @@ require './pieces/null_piece.rb'
 require './pieces/pawn.rb'
 require './pieces/bishop.rb'
 require './pieces/rook.rb'
+require './pieces/knight.rb'
 
 class Board
     def initialize
@@ -13,14 +14,14 @@ class Board
             @board[6][col] = Pawn.new(:white, @board, [6, col])
             case col
             when 0, 7
-                @board[0][col] = Rook.new(:black, @board, [0, col])  #rook
-                @board[7][col] = Rook.new(:white, @board, [6, col])  #rook
-            # when 1, 6
-            #     @board[0][col] = Piece.new(:black, @board, [0, col]) #knight
-            #     @board[7][col] = Piece.new(:white, @board, [6, col]) #knight
+                @board[0][col] = Rook.new(:black, @board, [0, col])  
+                @board[7][col] = Rook.new(:white, @board, [6, col])  
+            when 1, 6
+                @board[0][col] = Knight.new(:black, @board, [0, col]) 
+                @board[7][col] = Knight.new(:white, @board, [6, col]) 
             when 2, 5
-                @board[0][col] = Bishop.new(:black, @board, [0, col]) #bishop
-                @board[7][col] = Bishop.new(:white, @board, [6, col]) #bishop
+                @board[0][col] = Bishop.new(:black, @board, [0, col]) 
+                @board[7][col] = Bishop.new(:white, @board, [6, col]) 
             # when 3
             #     @board[0][col] = Piece.new(:black, @board, [0, col]) #queen
             #     @board[7][col] = Piece.new(:white, @board, [6, col]) #queen
