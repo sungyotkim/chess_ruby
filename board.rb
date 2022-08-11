@@ -104,6 +104,22 @@ class Board
         end
     end
 
+    def find_king(color)
+        king_pos = pieces.find { |p| p.color == color && p.is_a?(King) }
+        king_pos || (raise 'king not found?')
+    end
+
+    def pieces
+        @rows.flatten.reject(&:empty?)
+    end
+
+    def in_check?(color)
+        king_pos = find_king(color).pos #find the same color king's position
+        pieces.any? do |piece|
+            piece.color != color && piece.moves.include?(king_pos) #check all other pieces that aren't the color and return true if equal to king's position
+        end
+    end
+
     def game_over?
         false
     end
