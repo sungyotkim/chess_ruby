@@ -1,6 +1,8 @@
 require "./piece.rb"
 
 class Bishop < Piece
+    include Slideable
+
     def initialize(color, board, pos)
         super(color, board, pos)
         color == :black ? @symbol = "♝" : @symbol = "♗"
@@ -8,5 +10,9 @@ class Bishop < Piece
 
     def to_s
         @symbol
+    end
+
+    def move_dirs
+        diagonal_dirs
     end
 end

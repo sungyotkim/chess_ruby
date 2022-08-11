@@ -1,4 +1,5 @@
-
+require "./modules/slideable.rb"
+require "./modules/steppable.rb"
 
 class Piece
     def initialize(color, board, pos)
