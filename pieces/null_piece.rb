@@ -1,4 +1,4 @@
-require "/piece"
+require "./piece"
 require "singleton"
 
 class NullPiece < Piece
