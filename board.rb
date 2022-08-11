@@ -17,19 +17,19 @@ class Board
             case col
             when 0, 7
                 @board[0][col] = Rook.new(:black, @board, [0, col])  
-                @board[7][col] = Rook.new(:white, @board, [6, col])  
+                @board[7][col] = Rook.new(:white, @board, [7, col])  
             when 1, 6
                 @board[0][col] = Knight.new(:black, @board, [0, col]) 
-                @board[7][col] = Knight.new(:white, @board, [6, col]) 
+                @board[7][col] = Knight.new(:white, @board, [7, col]) 
             when 2, 5
                 @board[0][col] = Bishop.new(:black, @board, [0, col]) 
-                @board[7][col] = Bishop.new(:white, @board, [6, col]) 
+                @board[7][col] = Bishop.new(:white, @board, [7, col]) 
             when 3
                 @board[0][col] = Queen.new(:black, @board, [0, col]) 
-                @board[7][col] = Queen.new(:white, @board, [6, col]) 
+                @board[7][col] = Queen.new(:white, @board, [7, col]) 
             when 4
                 @board[0][col] = King.new(:black, @board, [0, col]) 
-                @board[7][col] = King.new(:white, @board, [6, col]) 
+                @board[7][col] = King.new(:white, @board, [7, col]) 
             end
         end
     end
@@ -139,6 +139,12 @@ class Board
             piece.valid_moves.empty?
         end
     end
+
+    #checkmate test order:
+    #     f2, f3
+    #     e7, e5
+    #     g2, g4
+    #     d8, h4
 
     def game_over?
         (checkmate?(:black) || checkmate?(:white)) ? true : false

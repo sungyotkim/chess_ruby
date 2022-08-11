@@ -40,6 +40,8 @@ class Display
             end_pos = self.input(*start_pos) #until the input method obtains an output(when the player presses enter) end_pos is nil
             self.render #we stop passing in start pos into render to get rid of the green square
             @board.move_piece(start_pos, end_pos)
+            puts "white is in check!" if @board.in_check?(:white)
+            puts "black is in check!" if @board.in_check?(:black) 
         end
     end
 end
