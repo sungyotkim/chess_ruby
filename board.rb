@@ -9,6 +9,8 @@ require './pieces/queen.rb'
 require './pieces/king.rb'
 
 class Board
+    attr_reader :board
+
     def initialize(fill_board = true)
         if fill_board
             @board = Array.new(8) { Array.new(8, NullPiece.instance) }
@@ -146,9 +148,13 @@ class Board
     
         no_null_pieces = pieces.reject { |piece| piece.is_a?(NullPiece) }
         no_null_pieces.each do |piece|
-            new_board[piece.pos] = piece.class.new(piece.color, new_board, piece.pos)
+            new_board[piece.pos] = piece.class.new(piece.color, new_board.board, piece.pos)
         end
     
+        # pieces.each do |piece|
+        #     piece.class.new(piece.color, new_board, piece.pos)
+        # end
+
         new_board
     end
 
