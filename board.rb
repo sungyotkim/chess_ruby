@@ -75,7 +75,7 @@ class Board
     end
 
     def show(pos, *selected) #pos is cursor's position
-        puts "  0 1 2 3 4 5 6 7"
+        puts "  a b c d e f g h"
         @board.each_with_index do |row, i|
             if i.even?
                 colored = (0..7).map do |j|
@@ -106,8 +106,10 @@ class Board
                 end
             end
 
-            puts "#{i} #{colored[0]}#{colored[1]}#{colored[2]}#{colored[3]}#{colored[4]}#{colored[5]}#{colored[6]}#{colored[7]}"
+            k = 8 - i
+            puts "#{k} #{colored[0]}#{colored[1]}#{colored[2]}#{colored[3]}#{colored[4]}#{colored[5]}#{colored[6]}#{colored[7]}"
         end
+        puts "Arrow keys, WASD, or vim to move, space or enter to confirm."
     end
 
     def empty?(pos)

@@ -10,6 +10,7 @@ class Display
     end
 
     def render(*start_pos) 
+        system("clear")
         pos = self.cursor.cursor_pos #red cursor
     
         if start_pos#if there is an argument, we make a green square to show selected square

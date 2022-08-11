@@ -33,7 +33,6 @@ class Pawn < Piece
             arr += start_move if !start_move.nil?
             arr += side_attacks if !side_attacks.nil? #can attack even if front is blocked
         else
-            p arr
             arr << forward_steps if !forward_steps.nil? #this returns one array so we push it
             arr += side_attacks if !side_attacks.nil? #can attack even if front is blocked
         end
