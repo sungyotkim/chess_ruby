@@ -35,11 +35,17 @@ class Board
     end
 
     def [](pos)
-        @board[pos[0]][pos[1]]
+        raise 'invalid pos' unless valid_pos?(pos)
+
+        row, col = pos
+        @board[row][col]
     end
 
-    def []=(pos, val)
-        @board[pos[0]][pos[1]] = val
+    def []=(pos, piece)
+        raise 'invalid pos' unless valid_pos?(pos)
+
+        row, col = pos
+        @board[row][col] = piece
     end
 
     def valid_pos?(end_pos)
@@ -51,10 +57,10 @@ class Board
     end
 
     def move_piece(start_pos, end_pos)
-        raise "There is no piece at this position" if @board[start_pos[0]][start_pos[1]].is_a?(NullPiece)
+        raise "There is no piece at this position" if self[start_pos].is_a?(NullPiece)
         raise "End position is out of board range" if !valid_pos?(end_pos)
 
-        piece = @board[start_pos[0]][start_pos[1]]
+        piece = self[start_pos]
         raise RuntimeError "Invalid move" if !piece.valid_moves.include?(end_pos)
 
         begin    
@@ -63,9 +69,9 @@ class Board
             retry
         end
 
-        @board[start_pos[0]][start_pos[1]] = NullPiece.instance #replace with empty instance
-        @board[end_pos[0]][end_pos[1]] = piece
-        piece.pos = [end_pos[0],end_pos[1]] #update to new position
+        self[start_pos] = NullPiece.instance #replace with empty instance
+        self[end_pos] = piece
+        piece.pos = end_pos #update to new position
     end
 
     def show(pos, *selected) #pos is cursor's position
