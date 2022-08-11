@@ -3,4 +3,4 @@
 require_relative 'board.rb'
 
 b = Board.new
-b.show
+b.show 

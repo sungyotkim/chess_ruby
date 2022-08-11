@@ -1,3 +1,5 @@
+
+
 class Piece
     def initialize(color, board, pos)
         @color = color
@@ -11,6 +13,10 @@ class Piece
 
     def pos=(val)
         @pos = val
+    end
+    
+    def valid_moves
+        moves #need an array of possible moves from the piece, use modules for sliding and stepping pieces
     end
 
     private
