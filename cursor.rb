@@ -79,11 +79,34 @@ class Cursor
     #need to add to the below two methods
 
     def handle_key(key)
-        
+        case key
+        when :return, :space
+            return @cursor_pos #want updated position once user pressed return/space
+        when :left
+            self.update_pos(:left) 
+            return nil #no need to save position as user is likely selecting a space still
+        when :right
+            self.update_pos(:right)
+            return nil
+        when :up
+            self.update_pos(:up)
+            return nil
+        when :down
+            self.update_pos(:down)
+            return nil
+        when :ctrl_c
+            Process.exit(0) #exit the game
+        end
     end
 
     def update_pos(diff)
-        
+        x = @cursor_pos[0] + MOVES[diff][0]
+        y = @cursor_pos[1] + MOVES[diff][1]
+        if self.board.valid_pos?([x,y]) #check to see if this position is in the board
+            @cursor_pos = [x, y] #if so, update
+        else
+            false #do not update
+        end
     end
 
 end
