@@ -19,6 +19,15 @@ class Piece
     end
     
     def valid_moves
-        moves #need an array of possible moves from the piece, use modules for sliding and stepping pieces
+        #need an array of possible moves from the piece, use modules for sliding and stepping pieces
+        moves.reject { |end_pos| move_into_check?(end_pos) } #reject positions that would result in check
+    end
+
+    private
+
+    def move_into_check?(end_pos)
+        test_board = board.dup
+        test_board.move_piece!(pos, end_pos)
+        test_board.in_check?(color)
     end
 end

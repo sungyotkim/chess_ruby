@@ -7,6 +7,7 @@ class NullPiece < Piece
 
     def initialize
         @symbol = ' '
+        @color = :none
     end
 
     def to_s

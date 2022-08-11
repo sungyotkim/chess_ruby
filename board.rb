@@ -9,28 +9,32 @@ require './pieces/queen.rb'
 require './pieces/king.rb'
 
 class Board
-    def initialize
-        @board = Array.new(8) { Array.new(8, NullPiece.instance) }
-        (0..7).each do |col|
-            @board[1][col] = Pawn.new(:black, @board, [1, col])
-            @board[6][col] = Pawn.new(:white, @board, [6, col])
-            case col
-            when 0, 7
-                @board[0][col] = Rook.new(:black, @board, [0, col])  
-                @board[7][col] = Rook.new(:white, @board, [7, col])  
-            when 1, 6
-                @board[0][col] = Knight.new(:black, @board, [0, col]) 
-                @board[7][col] = Knight.new(:white, @board, [7, col]) 
-            when 2, 5
-                @board[0][col] = Bishop.new(:black, @board, [0, col]) 
-                @board[7][col] = Bishop.new(:white, @board, [7, col]) 
-            when 3
-                @board[0][col] = Queen.new(:black, @board, [0, col]) 
-                @board[7][col] = Queen.new(:white, @board, [7, col]) 
-            when 4
-                @board[0][col] = King.new(:black, @board, [0, col]) 
-                @board[7][col] = King.new(:white, @board, [7, col]) 
+    def initialize(fill_board = true)
+        if fill_board
+            @board = Array.new(8) { Array.new(8, NullPiece.instance) }
+            (0..7).each do |col|
+                @board[1][col] = Pawn.new(:black, @board, [1, col])
+                @board[6][col] = Pawn.new(:white, @board, [6, col])
+                case col
+                when 0, 7
+                    @board[0][col] = Rook.new(:black, @board, [0, col])  
+                    @board[7][col] = Rook.new(:white, @board, [7, col])  
+                when 1, 6
+                    @board[0][col] = Knight.new(:black, @board, [0, col]) 
+                    @board[7][col] = Knight.new(:white, @board, [7, col]) 
+                when 2, 5
+                    @board[0][col] = Bishop.new(:black, @board, [0, col]) 
+                    @board[7][col] = Bishop.new(:white, @board, [7, col]) 
+                when 3
+                    @board[0][col] = Queen.new(:black, @board, [0, col]) 
+                    @board[7][col] = Queen.new(:white, @board, [7, col]) 
+                when 4
+                    @board[0][col] = King.new(:black, @board, [0, col]) 
+                    @board[7][col] = King.new(:white, @board, [7, col]) 
+                end
             end
+        else
+            @board = Array.new(8) { Array.new(8, NullPiece.instance) }
         end
     end
 
@@ -69,9 +73,21 @@ class Board
             retry
         end
 
-        self[start_pos] = NullPiece.instance #replace with empty instance
         self[end_pos] = piece
+        self[start_pos] = NullPiece.instance #replace with empty instance
         piece.pos = end_pos #update to new position
+    end
+
+    # move without performing checks
+    def move_piece!(start_pos, end_pos)
+        piece = self[start_pos]
+        raise 'piece cannot move like that' unless piece.moves.include?(end_pos)
+
+        self[end_pos] = piece
+        self[start_pos] = NullPiece.instance
+        piece.pos = end_pos
+
+        nil
     end
 
     def show(pos, *selected) #pos is cursor's position
@@ -123,6 +139,17 @@ class Board
 
     def pieces
         @board.flatten.reject(&:empty?)
+    end
+
+    def dup
+        new_board = Board.new(false)
+    
+        no_null_pieces = pieces.reject { |piece| piece.is_a?(NullPiece) }
+        no_null_pieces.each do |piece|
+            new_board[piece.pos] = piece.class.new(piece.color, new_board, piece.pos)
+        end
+    
+        new_board
     end
 
     def in_check?(color)
