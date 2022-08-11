@@ -3,11 +3,6 @@ class Piece
         @color = color
         @board = board
         @pos = pos
-        @symbol = "♟"
-    end
-
-    def to_s
-        @symbol
     end
 
     def empty?(pos)
