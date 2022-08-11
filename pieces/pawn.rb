@@ -87,7 +87,7 @@ class Pawn < Piece
         row, col = start_pos
         arr = []
         side_dir.each do |dx, dy|
-            if !@board[row + dx][col + dy].is_a?(NullPiece) && @board[row + dx][col + dy].color != current_color #check to see if side attack is possible
+            if !@board[row + dx][col + dy].is_a?(NullPiece) && !@board[row + dx][col + dy].nil? && @board[row + dx][col + dy].color != current_color #check to see if side attack is possible
                 arr << [row + dx, col + dy]
             end
         end

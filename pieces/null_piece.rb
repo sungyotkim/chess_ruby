@@ -3,7 +3,8 @@ require "singleton"
 
 class NullPiece < Piece
     include Singleton
-    
+    attr_reader :symbol
+
     def initialize
         @symbol = ' '
     end
@@ -12,6 +13,7 @@ class NullPiece < Piece
         @symbol
     end
 
-    private
-    attr_reader :symbol, :color
+    def moves
+        []
+    end
 end

@@ -2,14 +2,16 @@ require "./modules/slideable.rb"
 require "./modules/steppable.rb"
 
 class Piece
+    attr_reader :color, :board, :pos
+    
     def initialize(color, board, pos)
         @color = color
         @board = board
         @pos = pos
     end
 
-    def empty?(pos)
-        @board[pos[0]][pos[1]].is_a?(NullPiece)
+    def empty?
+        false
     end
 
     def pos=(val)
@@ -19,7 +21,4 @@ class Piece
     def valid_moves
         moves #need an array of possible moves from the piece, use modules for sliding and stepping pieces
     end
-
-    protected
-    attr_reader :color, :pos
 end
