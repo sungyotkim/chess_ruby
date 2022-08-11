@@ -1,4 +1,4 @@
-require "./piece"
+require "./piece.rb"
 require "singleton"
 
 class NullPiece < Piece

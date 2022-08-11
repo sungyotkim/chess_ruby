@@ -1,30 +1,31 @@
 require 'colorize'
 require_relative 'piece.rb'
 require './pieces/null_piece.rb'
+require './pieces/pawn.rb'
 
 class Board
     def initialize
         @board = Array.new(8) { Array.new(8, NullPiece.instance) }
         (0..7).each do |col|
-            @board[1][col] = Piece.new #pawns
-            @board[6][col] = Piece.new #pawns
-            case col
-            when 0, 7
-                @board[0][col] = Piece.new  #rook
-                @board[7][col] = Piece.new  #rook
-            when 1, 6
-                @board[0][col] = Piece.new #knight
-                @board[7][col] = Piece.new #knight
-            when 2, 5
-                @board[0][col] = Piece.new #bishop
-                @board[7][col] = Piece.new #bishop
-            when 3
-                @board[0][col] = Piece.new #queen
-                @board[7][col] = Piece.new #queen
-            when 4
-                @board[0][col] = Piece.new #king
-                @board[7][col] = Piece.new #king
-            end
+            @board[1][col] = Pawn.new(:black, @board, [1, col])
+            @board[6][col] = Pawn.new(:white, @board, [6, col])
+            # case col
+            # when 0, 7
+            #     @board[0][col] = Piece.new(:black, @board, [0, col])  #rook
+            #     @board[7][col] = Piece.new(:white, @board, [6, col])  #rook
+            # when 1, 6
+            #     @board[0][col] = Piece.new(:black, @board, [0, col]) #knight
+            #     @board[7][col] = Piece.new(:white, @board, [6, col]) #knight
+            # when 2, 5
+            #     @board[0][col] = Piece.new(:black, @board, [0, col]) #bishop
+            #     @board[7][col] = Piece.new(:white, @board, [6, col]) #bishop
+            # when 3
+            #     @board[0][col] = Piece.new(:black, @board, [0, col]) #queen
+            #     @board[7][col] = Piece.new(:white, @board, [6, col]) #queen
+            # when 4
+            #     @board[0][col] = Piece.new(:black, @board, [0, col]) #king
+            #     @board[7][col] = Piece.new(:white, @board, [6, col]) #king
+            # end
         end
     end
 
