@@ -6,6 +6,7 @@ require './pieces/bishop.rb'
 require './pieces/rook.rb'
 require './pieces/knight.rb'
 require './pieces/queen.rb'
+require './pieces/king.rb'
 
 class Board
     def initialize
@@ -26,9 +27,9 @@ class Board
             when 3
                 @board[0][col] = Queen.new(:black, @board, [0, col]) 
                 @board[7][col] = Queen.new(:white, @board, [6, col]) 
-            # when 4
-            #     @board[0][col] = Piece.new(:black, @board, [0, col]) #king
-            #     @board[7][col] = Piece.new(:white, @board, [6, col]) #king
+            when 4
+                @board[0][col] = King.new(:black, @board, [0, col]) 
+                @board[7][col] = King.new(:white, @board, [6, col]) 
             end
         end
     end
