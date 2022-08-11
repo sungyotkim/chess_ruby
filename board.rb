@@ -36,9 +36,13 @@ class Board
         @board[pos[0]][pos[1]] = val
     end
 
-    # def valid_pos?(end_pos)
-
-    # end
+    def valid_pos?(end_pos)
+        if end_pos[0] < 0 || end_pos[0] > 7 || end_pos[1] < 0 || end_pos[1] > 7
+            return false 
+        else
+            return true
+        end
+    end
 
     # def move_piece(start_pos, end_pos)
 
