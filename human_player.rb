@@ -13,11 +13,13 @@ class HumanPlayer < Player
         puts "#{color}'s turn. Move to where?"
         end_pos = display.input(*start_pos)
 
+        display.reset! if end_pos
         display.render
       else
         puts "#{color}'s turn. Move from where?"
         start_pos = display.input
 
+        display.reset! if start_pos
         display.render(*start_pos)
       end
     end

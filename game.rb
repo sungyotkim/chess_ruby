@@ -19,15 +19,12 @@ class Game
     until board.checkmate?(current_player)
       begin
         start_pos, end_pos = players[current_player].make_move(board)
-        @board.move_piece(start_pos, end_pos)
-        
+        @board.move_piece(current_player, start_pos, end_pos)
         swap_turn!
-        # notify_players
+        notify_players
       rescue StandardError => e
-        #need to raise error notification
+        @display.notifications[:error] = e.message
         retry
-        # puts "white is in check!" if @board.in_check?(:white)
-        # puts "black is in check!" if @board.in_check?(:black) 
       end
     end
 
@@ -36,7 +33,15 @@ class Game
   end
 
   def swap_turn!
-    @current_player == :white ? current_player = :black : current_player = :white
+    self.current_player == :white ? @current_player = :black : @current_player = :white
+  end
+
+  def notify_players
+    if board.in_check?(current_player)
+      display.set_check!
+    else
+      display.uncheck!
+    end
   end
 
 end

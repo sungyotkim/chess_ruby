@@ -62,17 +62,19 @@ class Board
         end
     end
 
-    def move_piece(start_pos, end_pos)
+    def move_piece(turn_color, start_pos, end_pos)
         raise "There is no piece at this position" if self[start_pos].is_a?(NullPiece)
         raise "End position is out of board range" if !valid_pos?(end_pos)
 
         piece = self[start_pos]
         raise RuntimeError "Invalid move" if !piece.valid_moves.include?(end_pos)
 
-        begin    
-        rescue RuntimeError
-            p "Please another move"
-            retry
+        if piece.color != turn_color
+            raise 'You must move your own piece'
+        elsif !piece.moves.include?(end_pos)
+            raise 'Piece does not move like that'
+        elsif !piece.valid_moves.include?(end_pos)
+            raise 'You cannot move into check'
         end
 
         self[end_pos] = piece
