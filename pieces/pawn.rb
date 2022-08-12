@@ -45,8 +45,8 @@ class Pawn < Piece
         row, col = start_pos
         dx, dy = forward_dir
 
-        forward_one = [row + dx, col + dy]
-        forward_two = [row + dx + dx, col + dy + dy] #pawns can move 2 spaces if at the starting position
+        forward_one = [(row + dx), (col + dy)]
+        forward_two = [(row + dx + dx),( col + dy + dy)] #pawns can move 2 spaces if at the starting position
 
         if @board[forward_one[0]][forward_one[1]].is_a?(NullPiece) 
             arr << forward_one
@@ -64,8 +64,8 @@ class Pawn < Piece
         dx, dy = forward_dir
 
         if row + dx >= 0 && row + dx < 8
-            if @board[row + dx][col].is_a?(NullPiece) #can only move if empty spot in front
-                return [row + dx, col]
+            if @board[(row + dx)][col].is_a?(NullPiece) #can only move if empty spot in front
+                return [(row + dx), col]
             else
                 return []
             end
@@ -86,8 +86,8 @@ class Pawn < Piece
         row, col = start_pos
         arr = []
         side_dir.each do |dx, dy|
-            if !@board[row + dx][col + dy].is_a?(NullPiece) && !@board[row + dx][col + dy].nil? && @board[row + dx][col + dy].color != current_color #check to see if side attack is possible
-                arr << [row + dx, col + dy]
+            if !@board[(row + dx)][(col + dy)].is_a?(NullPiece) && !@board[(row + dx)][(col + dy)].nil? && @board[(row + dx)][(col + dy)].color != current_color #check to see if side attack is possible
+                arr << [(row + dx), (col + dy)]
             end
         end
         arr

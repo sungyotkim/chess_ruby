@@ -15,24 +15,24 @@ class Board
         if fill_board
             @board = Array.new(8) { Array.new(8, NullPiece.instance) }
             (0..7).each do |col|
-                @board[1][col] = Pawn.new(:black, @board, [1, col])
-                @board[6][col] = Pawn.new(:white, @board, [6, col])
+                @board[1][col] = Pawn.new(:black, self, [1, col])
+                @board[6][col] = Pawn.new(:white, self, [6, col])
                 case col
                 when 0, 7
-                    @board[0][col] = Rook.new(:black, @board, [0, col])  
-                    @board[7][col] = Rook.new(:white, @board, [7, col])  
+                    @board[0][col] = Rook.new(:black, self, [0, col])  
+                    @board[7][col] = Rook.new(:white, self, [7, col])  
                 when 1, 6
-                    @board[0][col] = Knight.new(:black, @board, [0, col]) 
-                    @board[7][col] = Knight.new(:white, @board, [7, col]) 
+                    @board[0][col] = Knight.new(:black, self, [0, col]) 
+                    @board[7][col] = Knight.new(:white, self, [7, col]) 
                 when 2, 5
-                    @board[0][col] = Bishop.new(:black, @board, [0, col]) 
-                    @board[7][col] = Bishop.new(:white, @board, [7, col]) 
+                    @board[0][col] = Bishop.new(:black, self, [0, col]) 
+                    @board[7][col] = Bishop.new(:white, self, [7, col]) 
                 when 3
-                    @board[0][col] = Queen.new(:black, @board, [0, col]) 
-                    @board[7][col] = Queen.new(:white, @board, [7, col]) 
+                    @board[0][col] = Queen.new(:black, self, [0, col]) 
+                    @board[7][col] = Queen.new(:white, self, [7, col]) 
                 when 4
-                    @board[0][col] = King.new(:black, @board, [0, col]) 
-                    @board[7][col] = King.new(:white, @board, [7, col]) 
+                    @board[0][col] = King.new(:black, self, [0, col]) 
+                    @board[7][col] = King.new(:white, self, [7, col]) 
                 end
             end
         else
@@ -44,7 +44,9 @@ class Board
         raise 'invalid pos' unless valid_pos?(pos)
 
         row, col = pos
-        @board[row][col]
+        # p pos
+        # p col
+        self.board[row][col]
     end
 
     def []=(pos, piece)
@@ -55,10 +57,10 @@ class Board
     end
 
     def valid_pos?(end_pos)
-        if end_pos[0] < 0 || end_pos[0] > 7 || end_pos[1] < 0 || end_pos[1] > 7
-            return false 
+        if end_pos[0] >= 0 && end_pos[0] < 8 && end_pos[1] >= 0 && end_pos[1] < 8 && [end_pos].length == 2
+            return true 
         else
-            return true
+            return false
         end
     end
 
@@ -148,13 +150,12 @@ class Board
     
         no_null_pieces = pieces.reject { |piece| piece.is_a?(NullPiece) }
         no_null_pieces.each do |piece|
-            new_board[piece.pos] = piece.class.new(piece.color, new_board.board, piece.pos)
+            new_board[piece.pos] = piece.class.new(piece.color, new_board, piece.pos)
         end
     
         # pieces.each do |piece|
         #     piece.class.new(piece.color, new_board, piece.pos)
         # end
-
         new_board
     end
 

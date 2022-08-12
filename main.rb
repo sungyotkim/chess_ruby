@@ -9,9 +9,11 @@ b.move_piece!([6,6], [4,6])
 # b.move_piece([0,3], [4,7])
 b.show([0,0])
 d = b.dup
-d.show([0,0])
-# p d[[1,0]]
-# d.move_piece([1,0], [2,0])
+p d.class
+# d.show([0,0])
+# # p d[[1,0]]
+# d.move_piece!([1,0], [2,0])
+# d.show([0,0])
 # puts d.pieces
 # p b.pieces[39].moves
 # puts b.pieces[60]
