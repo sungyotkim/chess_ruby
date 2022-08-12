@@ -30,21 +30,18 @@ class Display
         end
     end
     
-    def play
-        until @board.game_over?
-            self.render
-            puts "Please choose your first position"
-            start_pos = self.input
-            self.render(*start_pos)
-            puts "Please choose your second position"
-            end_pos = self.input(*start_pos) #until the input method obtains an output(when the player presses enter) end_pos is nil
-            self.render #we stop passing in start pos into render to get rid of the green square
-            @board.move_piece(start_pos, end_pos)
-            puts "white is in check!" if @board.in_check?(:white)
-            puts "black is in check!" if @board.in_check?(:black) 
-        end
-    end
+    # def play
+    #     until @board.game_over?
+    #         self.render
+    #         puts "Please choose your first position"
+    #         start_pos = self.input
+    #         self.render(*start_pos)
+    #         puts "Please choose your second position"
+    #         end_pos = self.input(*start_pos) #until the input method obtains an output(when the player presses enter) end_pos is nil
+    #         self.render #we stop passing in start pos into render to get rid of the green square
+    #         @board.move_piece(start_pos, end_pos)
+    #         puts "white is in check!" if @board.in_check?(:white)
+    #         puts "black is in check!" if @board.in_check?(:black) 
+    #     end
+    # end
 end
-
-d= Display.new(Board.new)
-d.play

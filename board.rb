@@ -167,7 +167,6 @@ class Board
         pieces.select { |p| p.color == color }.all? do |piece|
             piece.valid_moves.empty?
         end
-        puts "Checkmate! #{color} loses!"
         true
     end
 
@@ -177,7 +176,7 @@ class Board
     #     g2, g4
     #     d8, h4
 
-    def game_over?
-        (checkmate?(:black) || checkmate?(:white)) ? true : false
-    end
+    # def game_over?
+    #     (checkmate?(:black) || checkmate?(:white)) ? true : false
+    # end
 end
