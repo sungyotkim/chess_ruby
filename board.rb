@@ -41,7 +41,6 @@ class Board
     end
 
     def [](pos)
-        # p pos
         raise 'invalid pos' unless valid_pos?(pos)
 
         row, col = pos
@@ -152,9 +151,6 @@ class Board
             new_board[piece.pos] = piece.class.new(piece.color, new_board, piece.pos)
         end
     
-        # pieces.each do |piece|
-        #     piece.class.new(piece.color, new_board, piece.pos)
-        # end
         new_board
     end
 
@@ -171,6 +167,8 @@ class Board
         pieces.select { |p| p.color == color }.all? do |piece|
             piece.valid_moves.empty?
         end
+        puts "Checkmate! #{color} loses!"
+        true
     end
 
     #checkmate test order:

@@ -52,6 +52,7 @@ class Pawn < Piece
         forward_two = [(row + dx + dx),( col + dy + dy)] #pawns can move 2 spaces if at the starting position
         
         if @board[forward_two].is_a?(NullPiece) && @board[forward_one].is_a?(NullPiece) #can only move if front two spots are empty
+            arr << forward_one
             arr << forward_two
         elsif @board[forward_one].is_a?(NullPiece) 
             arr << forward_one

@@ -3,12 +3,13 @@
 require_relative 'board.rb'
 
 b = Board.new
-b.move_piece!([6,6], [4,6])
+# p b[[6,5]].moves
+# b.move_piece!([6,6], [4,6])
 # b.move_piece([6,5], [5,5])
 # b.move_piece([1,4], [3,4])
 # b.move_piece([0,3], [4,7])
 b.show([0,0])
-d = b.dup
+# d = b.dup
 # p d.class
 # d.show([0,0])
 # # p d[[1,0]]
