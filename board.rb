@@ -41,11 +41,10 @@ class Board
     end
 
     def [](pos)
+        p pos
         raise 'invalid pos' unless valid_pos?(pos)
 
         row, col = pos
-        # p pos
-        # p col
         self.board[row][col]
     end
 
@@ -57,7 +56,7 @@ class Board
     end
 
     def valid_pos?(end_pos)
-        if end_pos[0] >= 0 && end_pos[0] < 8 && end_pos[1] >= 0 && end_pos[1] < 8 #&& [end_pos].length == 2
+        if end_pos[0] >= 0 && end_pos[0] < 8 && end_pos[1] >= 0 && end_pos[1] < 8 && end_pos.length == 2
             return true 
         else
             return false
