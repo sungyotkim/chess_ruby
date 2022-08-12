@@ -57,7 +57,7 @@ class Board
     end
 
     def valid_pos?(end_pos)
-        if end_pos[0] >= 0 && end_pos[0] < 8 && end_pos[1] >= 0 && end_pos[1] < 8 && [end_pos].length == 2
+        if end_pos[0] >= 0 && end_pos[0] < 8 && end_pos[1] >= 0 && end_pos[1] < 8 #&& [end_pos].length == 2
             return true 
         else
             return false

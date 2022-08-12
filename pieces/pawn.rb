@@ -30,6 +30,9 @@ class Pawn < Piece
     def moves
         arr = []
         if self.at_start_row?
+            # p "hello"
+            # p start_move
+            # p side_attacks
             arr += start_move if !start_move.nil?
             arr += side_attacks if !side_attacks.nil? #can attack even if front is blocked
         else
@@ -48,14 +51,17 @@ class Pawn < Piece
         forward_one = [(row + dx), (col + dy)]
         forward_two = [(row + dx + dx),( col + dy + dy)] #pawns can move 2 spaces if at the starting position
 
-        if @board[forward_one[0]][forward_one[1]].is_a?(NullPiece) 
+        # if @board[forward_one[0]][forward_one[1]].is_a?(NullPiece) 
+        #     arr << forward_one
+        # end
+        
+        if @board[forward_two].is_a?(NullPiece) && @board[forward_one].is_a?(NullPiece) #can only move if front two spots are empty
+            arr << forward_two
+        elsif @board[forward_one].is_a?(NullPiece) 
             arr << forward_one
         end
-        
-        if @board[forward_two[0]][forward_two[1]].is_a?(NullPiece) && @board[forward_one[0]][forward_one[1]].is_a?(NullPiece) #can only move if front two spots are empty
-            arr << forward_two
-        end
-        arr
+
+        return arr
     end
 
     def forward_steps
@@ -64,7 +70,7 @@ class Pawn < Piece
         dx, dy = forward_dir
 
         if row + dx >= 0 && row + dx < 8
-            if @board[(row + dx)][col].is_a?(NullPiece) #can only move if empty spot in front
+            if @board[[(row + dx), col]].is_a?(NullPiece) #can only move if empty spot in front
                 return [(row + dx), col]
             else
                 return []
@@ -86,7 +92,7 @@ class Pawn < Piece
         row, col = start_pos
         arr = []
         side_dir.each do |dx, dy|
-            if !@board[(row + dx)][(col + dy)].is_a?(NullPiece) && !@board[(row + dx)][(col + dy)].nil? && @board[(row + dx)][(col + dy)].color != current_color #check to see if side attack is possible
+            if !@board[[(row + dx),(col + dy)]].is_a?(NullPiece) && !@board[[(row + dx),(col + dy)]].nil? && @board[[(row + dx),(col + dy)]].color != current_color #check to see if side attack is possible
                 arr << [(row + dx), (col + dy)]
             end
         end
