@@ -67,7 +67,7 @@ class Board
         raise "End position is out of board range" if !valid_pos?(end_pos)
 
         piece = self[start_pos]
-        raise RuntimeError "Invalid move" if !piece.valid_moves.include?(end_pos)
+        raise "Invalid move" if !piece.valid_moves.include?(end_pos)
 
         if piece.color != turn_color
             raise 'You must move your own piece'
