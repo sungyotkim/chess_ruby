@@ -41,7 +41,7 @@ class Board
     end
 
     def [](pos)
-        p pos
+        # p pos
         raise 'invalid pos' unless valid_pos?(pos)
 
         row, col = pos

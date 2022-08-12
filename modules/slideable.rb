@@ -29,11 +29,10 @@ module Slideable
             cur_x, cur_y = start_pos
             until cur_x + dx < 0 || cur_y + dy < 0 || cur_x + dx > 7 || cur_y + dy > 7 #loop until you reach end of board
                 new_pos = [cur_x + dx, cur_y + dy]
-                row, col = new_pos
-                if @board[row][col].is_a?(NullPiece) #if position is empty, keep going
+                if @board[new_pos].is_a?(NullPiece) #if position is empty, keep going
                     possible_moves << new_pos
                 else #not an empty piece
-                    if @board[row][col].color != current_color #enemy color can be eaten, so include
+                    if @board[new_pos].color != current_color #enemy color can be eaten, so include
                         possible_moves << new_pos
                         break #stop the loop, can't go past the enemy's position
                     else

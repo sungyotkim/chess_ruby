@@ -17,6 +17,6 @@ module Steppable
         end
 
         #need to check if these spots are occupied and keep if they are of an opposing color
-        possible_moves.select { |pos| @board[pos[0]][pos[1]].is_a?(NullPiece) || @board[pos[0]][pos[1]].color != current_color }
+        possible_moves.select { |pos| @board[pos].is_a?(NullPiece) || @board[pos].color != current_color }
     end
 end
