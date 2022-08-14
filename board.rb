@@ -170,7 +170,6 @@ class Board
         pieces.select { |p| p.color == color }.all? do |piece|
             piece.valid_moves.empty?
         end
-        true
     end
 
     #checkmate test order:
