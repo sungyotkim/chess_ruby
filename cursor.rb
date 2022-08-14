@@ -96,6 +96,8 @@ class Cursor
             return nil
         when :ctrl_c
             Process.exit(0) #exit the game
+        when :escape
+            return "undo" #undo the selection
         end
     end
 
