@@ -11,13 +11,14 @@ class HumanPlayer < Player
 
       if start_pos
         puts "#{color}'s turn. Move to where?"
-        end_pos = display.input(*start_pos)
+        # end_pos = display.input(start_pos[0], start_pos[1], "#{color}'s turn. Move to where?")
+        end_pos = display.input("#{color}'s turn. Move to where?", *start_pos)
 
         display.reset! if end_pos
         display.render
       else
         puts "#{color}'s turn. Move from where?"
-        start_pos = display.input
+        start_pos = display.input("#{color}'s turn. Move from where?")
 
         display.reset! if start_pos
         display.render(*start_pos)

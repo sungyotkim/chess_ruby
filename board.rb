@@ -130,6 +130,7 @@ class Board
             puts "#{k} #{colored[0]}#{colored[1]}#{colored[2]}#{colored[3]}#{colored[4]}#{colored[5]}#{colored[6]}#{colored[7]}"
         end
         puts "Arrow keys, WASD, or vim to move, space or enter to confirm."
+        
     end
 
     def empty?(pos)

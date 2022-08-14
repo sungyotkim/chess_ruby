@@ -28,7 +28,8 @@ class Display
     def input(*pos) 
         output = self.cursor.get_input
         if output.nil? #keep looping until they press enter
-            self.render(*pos)
+            self.render(pos[1],pos[2])
+            puts "#{pos[0]}"
             input(*pos) #'recursive' call
         else
             return output
