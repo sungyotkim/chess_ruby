@@ -9,6 +9,7 @@ b = Board.new
 # b.move_piece([1,4], [3,4])
 # b.move_piece([0,3], [4,7])
 b.show([0,0])
+p b[[1,0]].valid_moves
 # d = b.dup
 # p d.class
 # d.show([0,0])

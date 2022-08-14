@@ -94,6 +94,17 @@ class Board
         nil
     end
 
+    def highlight_moves(piece, row_index)
+        columns = []
+        possible_moves = piece.valid_moves #array of moves
+        possible_moves.each do |pos|
+            if pos[0] == row_index #row indexes match
+                columns << pos[1] 
+            end
+        end
+        return columns #return the column
+    end
+
     def show(pos, *selected) #pos is cursor's position
         puts "  a b c d e f g h"
         @board.each_with_index do |row, i|
@@ -116,16 +127,38 @@ class Board
                 end
             end
 
-            if i == pos[0] #adds red square to where the player's cursor is 
-                colored[pos[1]] = (row[pos[1]].to_s + " ").colorize(:background => :red)
-            end
-
-            if selected #adds a green square to where the player previously selected
+            
+            if selected[0] #adds a green square to where the player previously selected
                 if i == selected[0] 
                     colored[selected[1]] = (row[selected[1]].to_s + " ").colorize(:background => :green)
                 end
+                
+                # puts self[selected]
+                piece = self[selected]
+                columns = highlight_moves(piece, i) 
+                #now color with alternating shades to highlight possible moves
+                if i.even?
+                    columns.each do |j|
+                        if j.even?
+                            colored[j] = (row[j].to_s + " ").colorize(:background => :light_yellow) 
+                        else
+                            colored[j] = (row[j].to_s + " ").colorize(:background => :yellow)
+                        end 
+                    end
+                else
+                    columns.each do |j|
+                        if j.odd?
+                            colored[j] = (row[j].to_s + " ").colorize(:background => :light_yellow) 
+                        else
+                            colored[j] = (row[j].to_s + " ").colorize(:background => :yellow)
+                        end 
+                    end
+                end
             end
-
+            
+            if i == pos[0] #adds red square to where the player's cursor is 
+                colored[pos[1]] = (row[pos[1]].to_s + " ").colorize(:background => :red)
+            end
             k = 8 - i
             puts "#{k} #{colored[0]}#{colored[1]}#{colored[2]}#{colored[3]}#{colored[4]}#{colored[5]}#{colored[6]}#{colored[7]}"
         end
